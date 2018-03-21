@@ -38,10 +38,11 @@ class Game extends React.Component {
            usedNumbers: [],
            randomNumberOfStars: Game.randomNumber(),
            answerIsCorrect: null,
-           redraws: 5,
+           redraws: 10,
            doneStatus: "",
            elapsed: 0,
            start: Date.now(),
+           modalIsOpen: false,
        };
     };
 
@@ -66,7 +67,6 @@ class Game extends React.Component {
         this.setState( () => ({
             elapsed: this.state.elapsed + 1,
         }), this.updateDoneStatus);
-        //this.setState({elapsed: this.state.elapsed + 1}), this.updateDoneStatus);
     };
 
     resetGame = () => this.setState(Game.initialState());
@@ -156,13 +156,13 @@ class Game extends React.Component {
          </div>
          <br/>
          {doneStatus ?
-            <DoneFrame resetGame={this.resetGame} doneStatus={doneStatus}/> :
+            <DoneFrame resetGame={this.resetGame}
+                       doneStatus={doneStatus}/> :
             <Numbers selectedNumbers={selectedNumbers}
                      selectNumber={this.selectNumber}
                      usedNumbers={usedNumbers}/>
          }
          <br/>
-
       </div>;
     }
 }
